@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="/Themes/Default/Content/Shared/JS/noticesModal.viewmodel.js?v=63660073824" type="text/javascript"></script>
+<script src="/Themes/Default/Content/Shared/JS/noticesModalServices.js?v=63660073824" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var CmsBaseUrl = '/enterprise/account/login';
+    var GlobalConfigCurrentLocation = 'enterprise';
+
+    $(document).ready(function () {
+        var noticeVM = new NoticesModalViewModel(function () {
+            tb_show("Notices", "TB_inline?height=255&width=700&inlineId=tbNotice&modal=false", "");
+            noticeVM.dismissModal();
+        });
+
+        ko.applyBindings(noticeVM, $("#tbNotice")[0]);
+        noticeVM.getNotices();
+    });
+</script>
+
+<div id="tbNotice" style="display: none">
+    <div class="tb-notice-wrapper">
+        <div class="tb-notice-content">
+            <div id="noticesList" data-bind="foreach: notices"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/Scripts/Default/CMSCommon.js?v=63660073824" type="text/javascript"></script>
+
+<form action="#" method="post" id="form1">
+
+</form>
+
+<div id="container">
+    <div id="header">
+
+        <div class="rightHeader">
+            <p>
+                Swan Leisure, <br>
+                Rathmines Square,<br>
+                Lower Rathmines Road,<br>
+                Rathmines, Dublin 6<br>
+                Tel: 01 4967908<br>
+                Email:<a href="mailto:info@swanleisure.ie"> info@swanleisure.ie</a>
+            </p>
+        </div>
+    </div>
+    <div id="menu">
+
+
+        <div>
+            <a class="MembersButton" href="/enterprise/Account/Logout">LOG OUT</a>
+        </div>
+
+
+    </div>
+    <div id="mainContent">
+
+
+        <div id="CSCAdmin">
+
+
+            <div class="tab accountTab">
+                <span>My Account</span>
+                <div><a href="/enterprise/Account/Logout">Log Out</a></div>
+                <div><a href="/enterprise/Account/CSC">My Home</a></div>
+                <div><a href="/enterprise/Basket/Index" class="selected">Basket (1)</a></div>
+                <div><a href="/enterprise/Account/PersonalProfile">My Profile</a></div>
+                <div><a href="/enterprise/billsandpayments">Bills &amp; Payments</a></div>
+
+
+                <div><a href="/enterprise/Account/ChangeUsername">Change My Email Address</a></div>
+                <div><a href="/enterprise/Account/ChangePassword">Change My Password</a></div>
+                <div><a href="/enterprise/communications">Communication Preferences</a></div>
+
+
+            </div>
+
+
+            <div class="tab membershipTab">
+                <span>Memberships</span>
+
+                <div><a href="/enterprise/Account/MyMemberships">My Membership </a></div>
+
+
+                <div><a href="/enterprise/MembershipCentre/Index">Add Additional Memberships</a></div>
+
+
+                <div><a href="/enterprise/Account/UnlinkMembership">Unlink My Membership</a></div>
+
+
+            </div>
+
+            <div class="tab bookingTab">
+                <span>Bookings</span>
+                <div><a href="/enterprise/BookingsCentre/Index">Make a Booking</a></div>
+                <div><a href="/enterprise/BookingsCentre/MyBookings">View / Amend My Bookings</a></div>
+                <div><a href="/enterprise/BookingsCentre/MemberTimetable">Class Timetable</a></div>
+
+
+                <div><a href="https://swanleisure.legendonlineservices.co.uk/enterprise/program/index">Search for Sports
+                    Courses</a></div>
+
+
+            </div>
+
+
+            <div class="tab">
+                <span>View Sports Courses / Camps</span>
+
+                <div>
+                    <a href="/enterprise/sportscourses/courses">View My Courses</a>
+                </div>
+
+                <div>
+                    <a href="/enterprise/sportscourses/achievements">View My Achievements</a>
+                </div>
+
+                <div>
+                    <a href="/enterprise/contactgroups">My Groups</a>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="formOffset">
+            <div class="formBand">
+                <img src="/media/siteimages/iconBasket.gif" alt="Basket">
+                My Basket
+            </div>
+            <div class="formInput">
+                <div class="fieldSetWrapper">
+
+
+                    <div class="fieldSetTop"></div>
+                    <div class="fieldSetContent">
+                        <fieldset>
+                            <legend>What's in My Basket?</legend>
+
+                            <div>
+
+                            </div>
+
+                            <div>
+                                <div id="basketStageIndicator" style="background-position: 50% -98px;"></div>
+                            </div>
+
+
+                            <div>
+                                <div class="basketItem">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td class="col1">Booking: Barre Pilates (Swan Leisure)</td>
+                                            <td class="alignRight">€0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>28 April 2018 14:15 - 15:00</td>
+                                            <td class="alignRight"><a onclick="$(this).html('Processing...');"
+                                                                      href="/enterprise/Basket/RemoveBooking?bookingId=361145">Remove
+                                                Item</a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="formSubmit" id="totalAmount">
+                                <table class="table100">
+
+
+                                    <tbody>
+                                    <tr>
+                                        <td style="text-align: left;">Total Outstanding:
+                                        </td>
+                                        <td style="text-align: right;"><strong>€0.00</strong></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div>
+
+                                <div class="formSubmit">
+
+
+                                    <div class="basketButtonWrapper ">
+
+                                        <a id="btnPayNow" onclick="updatePayButton();" href="/enterprise/Basket/Pay"
+                                           class="MembersButton" target="_top">Complete</a>
+                                        <h4>Complete my basket</h4>
+                                        <p>There is no charge for your basket, click <b
+                                                class="TextMembers">'Complete'</b> to finish.</p>
+                                        <hr>
+                                    </div>
+
+
+                                    <script type="text/javascript">
+                                        function updatePayButton() {
+                                            // hide the old button and replace it with a dummy button to avoid double clicking
+                                            $("#btnPayNow").hide();
+                                            $("#btnPayNow").after("<a href='#' onclick='return false;' class='MembersButton'>Processing...</a>");
+                                        }
+                                    </script>
+
+
+                                </div>
+
+                            </div>
+
+                            <div><br><br><br>
+                                <div class="bookingSuggestionWrapper">
+                                    <h4>Booking Suggestions</h4>
+                                    <table>
+                                        <tbody>
+                                        <tr title="SuperSpin at Swan Leisure">
+                                            <td class="col1"><span title="SuperSpin at Swan Leisure">SuperSpin</span> <a
+                                                    href="/enterprise/BookingsCentre/GetPrice?instanceId=134388"
+                                                    rel="/enterprise/BookingsCentre/GetPrice?instanceId=134388"
+                                                    id="price134388" class="jTip150"><img
+                                                    src="/media/siteimages/moreInfoBlue.gif" alt="view Price"
+                                                    style="border:0px;"></a><br>Swan Leisure<br>29 April 2018 10:15
+                                            </td>
+                                            <td class="col2"><a class="MembersButton"
+                                                                href="/enterprise/Basket/AddPublicClassBooking?bookingId=134388"
+                                                                onclick="$(this).html('Processing...');">Book Now</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr>
+                                            </td>
+                                        </tr>
+                                        <tr title="HIITSpin30 at Swan Leisure">
+                                            <td class="col1"><span title="HIITSpin30 at Swan Leisure">HIITSpin30</span>
+                                                <a href="/enterprise/BookingsCentre/GetPrice?instanceId=134115"
+                                                   rel="/enterprise/BookingsCentre/GetPrice?instanceId=134115"
+                                                   id="price134115" class="jTip150"><img
+                                                        src="/media/siteimages/moreInfoBlue.gif" alt="view Price"
+                                                        style="border:0px;"></a><br>Swan Leisure<br>30 April 2018 07:15
+                                            </td>
+                                            <td class="col2"><a class="MembersButton"
+                                                                href="/enterprise/Basket/AddPublicClassBooking?bookingId=134115"
+                                                                onclick="$(this).html('Processing...');">Book Now</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="fieldSetBottom"></div>
+
+                </div>
+
+
+            </div>
+            <div class="formFooterBand"></div>
+        </div>
+
+
+    </div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+    <div class="footer-left">
+        © Swan Leisure 2011 - established by <a target="_blank" href="http://www.dublincity.ie/">Dublin City Council</a>
+    </div>
+    <div class="footer-right">
+        Online services provided by <a href="http://www.legendware.co.uk">Legend Club Management Systems</a>
+    </div>
+</div>
+
+<form>
+
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadSearch('enterprise');
+    });
+</script>
+<!-- Google Analytics -->
+
+<!-- Google Analytics -->
+
+
+<div id="cluetip-waitimage" style="position: absolute; display: none;"></div>
+<div id="cluetip" style="display: none; position: absolute;">
+    <div style="z-index: 96; opacity: 0.1; top: 1px; left: 1px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div style="z-index: 96; opacity: 0.1; top: 2px; left: 2px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div style="z-index: 96; opacity: 0.1; top: 3px; left: 3px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div style="z-index: 96; opacity: 0.1; top: 4px; left: 4px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div style="z-index: 96; opacity: 0.1; top: 5px; left: 5px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div style="z-index: 96; opacity: 0.1; top: 6px; left: 6px; position: absolute; background-color: rgb(0, 0, 0);"></div>
+    <div id="cluetip-outer" style="position: relative; z-index: 97;"><h3 id="cluetip-title"></h3>
+        <div id="cluetip-inner"></div>
+    </div>
+    <div id="cluetip-extra"></div>
+    <div id="cluetip-arrows" class="cluetip-arrows"></div>
+</div>
+</body>
+</html>
