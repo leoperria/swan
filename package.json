@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "console-probe": "^3.2.0",
+    "moment": "^2.22.1",
     "puppeteer": "1.2.0"
   }
 }
