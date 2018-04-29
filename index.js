@@ -10,6 +10,8 @@ const password = '';
 const win_width = 1200;
 const win_height = 1000;
 
+// 15 19 * * *  /home/leonardo/.nvm/versions/node/v8.9.3/bin/node /home/leonardo/code/repos/swan/index.js >> /home/leonardo/swan.log 2>&1
+
 const bookingPlan = {
     "Monday": {
         name: "pilates",
@@ -42,6 +44,9 @@ const bookingPlan = {
 };
 
 
+console.log("----------------------------------------------------------------------------------");
+console.log(moment().format());
+
 let browser = null;
 (async () => {
 
@@ -51,8 +56,8 @@ let browser = null;
         let args = [];
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 10,
+            headless: true,
+            //slowMo: 10,
             args
         });
         const page = await browser.newPage();
