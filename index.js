@@ -12,6 +12,18 @@ const win_height = 1000;
 
 // 15 19 * * *  /home/leonardo/.nvm/versions/node/v8.9.3/bin/node /home/leonardo/code/repos/swan/index.js >> /home/leonardo/swan.log 2>&1
 
+/*
+
+TODO:
+
+1) Check for zero price
+2) Handle "Add to waiting list" case
+3) Handle multiple booking in the same day
+4) Deploy as a cron job somewhere in the cloud
+
+ */
+
+
 const bookingPlan = {
     "Monday": {
         name: "pilates",
@@ -56,8 +68,8 @@ let browser = null;
         let args = [];
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
-            headless: true,
-            //slowMo: 10,
+            headless: false,
+            //slowMo: 50,
             args
         });
         const page = await browser.newPage();
