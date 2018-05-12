@@ -4,9 +4,10 @@ const puppeteer = require("puppeteer");
 const json = require('console-probe').json;
 const moment = require('moment');
 
+const credentials = require('./credentials');
+
 const NUM_RETRIES = 3;
-const userName = 'dany.mura72@gmail.com';
-const password = '';
+
 const win_width = 1200;
 const win_height = 1000;
 
@@ -69,7 +70,7 @@ let browser = null;
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
             headless: false,
-            //slowMo: 50,
+            slowMo: 20,
             args
         });
         const page = await browser.newPage();
@@ -79,7 +80,7 @@ let browser = null;
             height: win_height
         });
 
-        await login(page);
+        await login(page, credentials.userName, credentials.password);
 
         const timeTable = await getTimeTable(page);
 
@@ -87,22 +88,22 @@ let browser = null;
 
         const desiredBooking = bookingPlan[getDayOfTheWeek(moment().day())];
 
-        const booking = timeTable.find( row => {
-           return row.status !== "Past"
-               && row.name.toLowerCase() === desiredBooking.name.toLowerCase()
-               && row.time === desiredBooking.time
-               && row.classDate.isSame(moment(), "day")
+        const booking = timeTable.find(row => {
+            return row.status !== "Past"
+                && row.name.toLowerCase() === desiredBooking.name.toLowerCase()
+                && row.time === desiredBooking.time
+                && row.classDate.isSame(moment(), "day")
         });
 
         console.log("desiredBooking:");
         json(desiredBooking);
 
-        if (!booking){
+        if (!booking) {
             throw new Error("No booking found that matches the criteria. Giving up");
-        }else {
+        } else {
             console.log("Booking found: ");
             json(booking);
-            if (booking.status === "Add To Waiting List"){
+            if (booking.status === "Add To Waiting List") {
                 throw new Error("'Add to waiting list' is not implemented yet.");
             }
             await page.click(`#${booking.bookId}`);
@@ -111,7 +112,7 @@ let browser = null;
             console.log("OK!!! Booking added...");
         }
 
-        await browser.close();
+        //await browser.close();
     } catch (e) {
         await criticalException(e);
         if (browser) {
@@ -123,7 +124,7 @@ let browser = null;
 })();
 
 
-async function login(page) {
+async function login(page, userName, password) {
     await gotoPageWithRetry(page, "https://swanleisure.legendonlineservices.co.uk/enterprise/account/login");
     await page.type('input[name="login.Email"', userName);
     await page.type('input[name="login.Password"', password);
