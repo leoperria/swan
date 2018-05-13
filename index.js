@@ -69,8 +69,7 @@ let browser = null;
         let args = [];
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 20,
+            headless: true,
             args
         });
         const page = await browser.newPage();
