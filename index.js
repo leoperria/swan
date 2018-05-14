@@ -32,7 +32,7 @@ const bookingPlan = {
     },
     "Tuesday": {
         name: "pilates",
-        time: "13:15"
+        time: "7:15"
     },
     "Wednesday": {
         name: "Pilates",
