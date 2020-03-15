@@ -11,7 +11,7 @@ const NUM_RETRIES = 3;
 const win_width = 1200;
 const win_height = 1000;
 
-// 15 19 * * *  /home/leonardo/.nvm/versions/node/v8.9.3/bin/node /home/leonardo/code/repos/swan/index.js >> /home/leonardo/swan.log 2>&1
+// 15 19 * * *  /usr/bin/node /home/leonardo/swan/index.js >> /home/leonardo/swan.log 2>&1
 
 /*
 
@@ -57,7 +57,7 @@ let browser = null;
         let args = [];
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
          //   slowMo: 50,
             args
         });
