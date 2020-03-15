@@ -28,15 +28,7 @@ TODO:
 const bookingPlan = {
     "Monday": {
         name: "pilates",
-        time: "10:00"
-    },
-    "Tuesday": {
-        name: "pilates",
-        time: "7:15"
-    },
-    "Wednesday": {
-        name: "Pilates",
-        time: "10:00"
+        time: "09:35"
     },
     "Thursday": {
         name: "pilates",
@@ -44,15 +36,11 @@ const bookingPlan = {
     },
     "Friday": {
         name: "Pilates",
-        time: "10:15"
+        time: "10:45"
     },
     "Saturday": {
         name: "pilates",
         time: "13:15"
-    },
-    "Sunday": {
-        name: "Pilates",
-        time: "12:30"
     }
 };
 
@@ -69,7 +57,8 @@ let browser = null;
         let args = [];
         args.push(`--window-size=${win_width},${win_height}`);
         browser = await puppeteer.launch({
-            headless: true,
+            headless: false,
+         //   slowMo: 50,
             args
         });
         const page = await browser.newPage();
@@ -86,6 +75,10 @@ let browser = null;
         json(timeTable.slice(0, 10));
 
         const desiredBooking = bookingPlan[getDayOfTheWeek(moment().day())];
+
+        if  (desiredBooking === undefined) {
+            gracefulExit("No booking plan entry for today")
+        }
 
         const booking = timeTable.find(row => {
             return row.status !== "Past"
@@ -111,7 +104,6 @@ let browser = null;
             console.log("OK!!! Booking added...");
         }
 
-        //await browser.close();
     } catch (e) {
         await criticalException(e);
         if (browser) {
@@ -185,6 +177,11 @@ async function getTimeTable(page) {
 async function criticalException(e) {
     console.error("Critical exception: ", e);
     process.exit(1);
+}
+
+async  function gracefulExit(msg) {
+     console.log(msg);
+     process.exit(0);
 }
 
 async function gotoPageWithRetry(page, url) {
